@@ -8,8 +8,7 @@ $filename= basename($_FILES['uploadedfile']['name']);
 $target_path = $target_path . $filename; 
 
 if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
-    //echo "The file ".  basename( $_FILES['uploadedfile']['name']). 
-    " has been uploaded";
+
 } else{
 	header('Content-type: text/html'); 
 	echo "Error code: ";
