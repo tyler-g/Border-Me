@@ -1,0 +1,167 @@
+<html>
+
+<head>
+<title>Border Me!</title>
+
+<style>
+
+#wrap{
+margin:0 auto;
+width:600px;
+}
+
+body{
+font-size:62.5%;
+}
+
+#choose{
+width:10.3em;
+height:5em;
+border:2px dashed #ccc;
+
+}
+label{
+float:left;
+font-size:10px;
+text-transform:uppercase;
+display:block;
+font-weight:bold;
+
+}
+input{
+padding:10px;
+margin-bottom:20px;
+text-align:center;
+font-size:5em;
+font-family:Georgia,serif;
+
+}
+
+input:not([type="submit"]){
+border-radius:10px;
+border-style:solid;
+border-color:#ccc;
+}
+
+input:focus{
+
+}
+
+#color{
+background:url(wheel.gif);
+background-size:50px 50px;
+background-repeat:no-repeat;
+background-position:9.65em;
+}
+
+#color:focus{
+background-position:9em;
+}
+
+#thickness{
+background:url(enso.jpg);
+background-repeat:no-repeat;
+background-position:9.5em;
+}
+
+#thickness:focus{
+background-position:8.85em;
+}
+
+.trans{
+-moz-transition: all 0.3s ease-out;
+-o-transition: all 0.3s ease-out;
+-webkit-transition: all 0.3s ease-out;
+-ms-transition: all 0.3s ease-out;
+transition: all 0.3s ease-out;
+}
+
+a{
+color:#555;
+font-size:2em;
+}
+
+input[type="submit"]{
+font-size:10px;
+}
+
+</style>
+
+</head>
+
+<body class="trans">
+
+<div id="wrap">
+
+<form action="gd.php" method="post"
+enctype="multipart/form-data" target="_blank">
+<label>image</label><br/>
+<input type="file" name="uploadedfile" id="choose"/>
+<br/>
+<label>thickness</label><br/>
+<input class="trans" type="text" id="thickness" name="thickness" value="1" maxlength="2" required="required"/>
+<br/>
+<label>color</label><br/>
+<input class="trans" type="color" id="color" name="color" value="cccccc" maxlength="6" minlength="6" required="required"/>
+<br/>
+<input type="submit" value = "border me" id="go"/>
+</form>
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+
+
+<script>
+
+  
+$(document).ready(function() {
+
+//VARS
+var $colorinput = $('#color');
+var $thicknessinput = $('#thickness');
+
+//FUNCTIONS
+function IsValidColor(hexcolor) { 
+var strPattern = /^([0-9a-f]{3}){1,2}$/i;
+return strPattern.test(hexcolor); 
+}
+
+
+$colorinput.change( function() {
+
+var $cur= $(this);
+
+if (IsValidColor($cur.val())){
+var hex = '#'+ $cur.val();
+$cur.css('borderColor',hex);
+}
+
+});
+
+$thicknessinput.change( function() {
+
+var $cur= $(this);
+var size = $cur.val() +"px";
+console.log(size);
+console.log($("#color").css('borderSize'))
+$colorinput.css('borderWidth',size);
+  
+});
+
+
+$colorinput.change();
+
+
+}); //end DOM ready
+</script>
+
+
+
+
+</body>
+
+
+</html>
