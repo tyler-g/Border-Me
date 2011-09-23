@@ -1,6 +1,7 @@
 <?php 
 
 
+
 $target_path = "uploads/";
 $thickness = $_POST['thickness'];
 $color = $_POST['color'];
